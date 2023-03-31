@@ -1,0 +1,16 @@
+- name: Install or remove postfix mail server
+  hosts: mail_server
+  become: true
+
+  tasks:
+    - name: Install postfix
+      package:
+        name: postfix
+        state: present
+      when: "'init' in tags"
+
+    - name: Remove postfix
+      package:
+        name: postfix
+        state: absent
+      when: "'drop' in tags"
